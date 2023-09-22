@@ -1,5 +1,5 @@
-{ mkDerivation, base, lib }:
-mkDerivation {
+{ lib, fetchFromGitHub, haskellPackages }:
+haskellPackages.mkDerivation {
   pname = "hxh";
   version = "0.1.0.0";
   src = ./.;
