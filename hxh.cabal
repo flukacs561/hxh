@@ -19,7 +19,7 @@ common warnings
 executable hxh
     import:           warnings
     main-is:          Main.hs
-    -- other-modules:
+    other-modules:    Tableformatter
     -- other-extensions:
     build-depends:    base ^>=4.16.4.0
     hs-source-dirs:   app
