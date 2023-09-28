@@ -68,7 +68,8 @@ splitAtPipes str =
       takeWhile (/= '|') str : splitAtPipes (tail $ dropWhile (/= '|') str)
 
 removeSurroundingWhiteSpace :: Cell -> Cell
-removeSurroundingWhiteSpace = removeTrailingWhitespace . removeLeadingWhiteSpace
+removeSurroundingWhiteSpace cell = let removed = removeTrailingWhitespace $ removeLeadingWhiteSpace cell
+  in if removed == "" then " " else removed
 
 removeLeadingWhiteSpace :: Cell -> Cell
 removeLeadingWhiteSpace = dropWhile (\c -> or $ fmap (c ==) [' ', '\n', '\t'])
