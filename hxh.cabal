@@ -21,6 +21,6 @@ executable hxh
     main-is:          Main.hs
     other-modules:    Tableformatter
     -- other-extensions:
-    build-depends:    base ^>=4.16.4.0
+    build-depends:    base ^>=4.16.4.0, time, text
     hs-source-dirs:   app
     default-language: Haskell2010
