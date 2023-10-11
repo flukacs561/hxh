@@ -1,5 +1,4 @@
-module Tableformatter
-( processTable ) where
+module Tableformatter (processTable) where
 
 import Data.List
 
@@ -68,8 +67,9 @@ splitAtPipes str =
       takeWhile (/= '|') str : splitAtPipes (tail $ dropWhile (/= '|') str)
 
 removeSurroundingWhiteSpace :: Cell -> Cell
-removeSurroundingWhiteSpace cell = let removed = removeTrailingWhitespace $ removeLeadingWhiteSpace cell
-  in if removed == "" then " " else removed
+removeSurroundingWhiteSpace cell =
+  let stripped = removeTrailingWhitespace $ removeLeadingWhiteSpace cell
+   in if stripped == "" then " " else stripped
 
 removeLeadingWhiteSpace :: Cell -> Cell
 removeLeadingWhiteSpace = dropWhile (\c -> or $ fmap (c ==) [' ', '\n', '\t'])

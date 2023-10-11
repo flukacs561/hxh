@@ -1,38 +1,35 @@
 module Main where
 
 import Tableformatter
+import DateCommands
 
 import System.Environment
 import Data.List ( nub )
-import Data.Time
 
-dispatch :: String -> String -> IO ()
-dispatch cmd 
+dispatch :: Maybe String -> String -> IO ()
+dispatch Nothing = putStrLn . const "No argument was provided."
+dispatch (Just cmd)
   | cmd == "ft" = putStrLn . Tableformatter.processTable
   | cmd == "nub" = putStrLn . unlines . nub . lines
   | cmd == "note" = note
-  | cmd == "date" = const insertDate
-  | otherwise = putStrLn . throwError cmd
+  | cmd == "date" = const $ getCurrentDate >>= putStrLn
+  | cmd == "ddate" = const $ getCurrentDateWithDay >>= putStrLn
+  | otherwise = putStrLn . const throwError cmd
 
-throwError :: String -> String -> String
-throwError cmd _ = "Invalid argument: \"" ++ cmd ++ "\" is not an actual command in hxh."
-
-getCurrentDate :: IO String
-getCurrentDate = do
-    currentTime <- getCurrentTime
-    let formattedDate = formatTime defaultTimeLocale "%Y-%m-%d" currentTime
-    return formattedDate
+throwError :: String -> String
+throwError cmd = "Invalid argument: \"" ++ cmd ++ "\" is not an actual command in hxh."
 
 note :: String -> IO ()
 note title = do
   date <- getCurrentDate
   putStrLn $ "---\ntitle: " <> title <> "author: Lukács Ferenc\ndate: " <> date <> "\ntags: \n---"
 
-insertDate :: IO ()
-insertDate = getCurrentDate >>= putStrLn 
+safeHead :: [a] -> Maybe a
+safeHead [] = Nothing
+safeHead (x:_) = Just x
 
 main :: IO ()
 main = do
   args <- getArgs
   input <- getContents
-  dispatch (head args) input
+  dispatch (safeHead args) input
