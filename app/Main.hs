@@ -1,6 +1,6 @@
 module Main where
 
-import Tableformatter
+import TableFormatter
 import DateCommands
 
 import System.Environment
@@ -9,7 +9,7 @@ import Data.List ( nub )
 dispatch :: Maybe String -> String -> IO ()
 dispatch Nothing = putStrLn . const "No argument was provided."
 dispatch (Just cmd)
-  | cmd == "ft" = putStrLn . Tableformatter.processTable
+  | cmd == "ft" = putStrLn . TableFormatter.processTable
   | cmd == "nub" = putStrLn . unlines . nub . lines
   | cmd == "note" = note
   | cmd == "date" = const $ getCurrentDate >>= putStrLn

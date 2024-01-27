@@ -1,4 +1,4 @@
-module Tableformatter (processTable) where
+module TableFormatter (processTable) where
 
 import Data.List
 
