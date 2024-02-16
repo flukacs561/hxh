@@ -14,7 +14,7 @@ dispatch (Just cmd)
   | cmd == "note" = note
   | cmd == "date" = const $ getCurrentDate >>= putStrLn
   | cmd == "ddate" = const $ getCurrentDateWithDay >>= putStrLn
-  | cmd == "lt" = const $ insertLatexTemplate >>= putStrLn -- for LaTeX template
+  | cmd == "lt" = const $ putStrLn insertLatexTemplate -- for LaTeX template
   | cmd == "le" = putStrLn . makeEnvironment -- for LaTeX environment
   | otherwise = putStrLn . const throwError cmd
 
