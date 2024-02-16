@@ -19,7 +19,7 @@ common warnings
 executable hxh
     import:           warnings
     main-is:          Main.hs
-    other-modules:    TableFormatter, DateCommands, MarkdownFormatter
+    other-modules:    TableFormatter, DateCommands, LatexCommands
     -- other-extensions:
     build-depends:    base, time, text
     hs-source-dirs:   app

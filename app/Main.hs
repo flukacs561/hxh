@@ -1,10 +1,10 @@
 module Main where
 
-import TableFormatter
+import Data.List (nub)
 import DateCommands
-
+import LatexCommands
 import System.Environment
-import Data.List ( nub )
+import TableFormatter
 
 dispatch :: Maybe String -> String -> IO ()
 dispatch Nothing = putStrLn . const "No argument was provided."
@@ -14,6 +14,8 @@ dispatch (Just cmd)
   | cmd == "note" = note
   | cmd == "date" = const $ getCurrentDate >>= putStrLn
   | cmd == "ddate" = const $ getCurrentDateWithDay >>= putStrLn
+  | cmd == "lt" = const $ insertLatexTemplate >>= putStrLn -- for LaTeX template
+  | cmd == "le" = putStrLn . makeEnvironment -- for LaTeX environment
   | otherwise = putStrLn . const throwError cmd
 
 throwError :: String -> String
@@ -26,7 +28,7 @@ note title = do
 
 safeHead :: [a] -> Maybe a
 safeHead [] = Nothing
-safeHead (x:_) = Just x
+safeHead (x : _) = Just x
 
 main :: IO ()
 main = do
