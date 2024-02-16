@@ -4,7 +4,7 @@ import System.IO
 
 insertLatexTemplate :: IO String
 insertLatexTemplate = do
-  handle <- openFile "template.tex" ReadMode
+  handle <- openFile "../data/template.tex" ReadMode
   hGetContents' handle
 
 makeEnvironment :: String -> String
