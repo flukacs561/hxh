@@ -1,3 +1,4 @@
 dist-newstyle
 dist-newstyle/*
-app/template.tex
+result
+result/*
